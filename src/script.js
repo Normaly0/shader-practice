@@ -13,11 +13,14 @@ import testFragmentShader from './shaders/test/fragment.glsl'
 import terrainVertexShader from './shaders/terrain/vertex.glsl'
 import terrainFragmentShader from './shaders/terrain/fragment.glsl'
 
+import improvVertexShader from './shaders/improvise/vertex.glsl';
+import improvFragmentShader from './shaders/improvise/fragment.glsl';
+
 /**
  * Base
  */
 // Debug
-const gui = new dat.GUI()
+const gui = new dat.GUI();
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -32,20 +35,32 @@ const scene = new THREE.Scene()
 const geometry = new THREE.PlaneGeometry(1, 1, 128, 128)
 
 // Material
-// const material = new THREE.RawShaderMaterial({
-//     vertexShader: testVertexShader,
-//     fragmentShader: testFragmentShader,
-//     side: THREE.DoubleSide
-// })
-
 const material = new THREE.RawShaderMaterial({
-    vertexShader: terrainVertexShader,
-    fragmentShader: terrainFragmentShader,
+    vertexShader: testVertexShader,
+    fragmentShader: testFragmentShader,
     uniforms: {
         uTime: {value: 0}
     },
-    side: THREE.DoubleSide,
+    side: THREE.DoubleSide
 })
+
+// const material = new THREE.RawShaderMaterial({
+//     vertexShader: terrainVertexShader,
+//     fragmentShader: terrainFragmentShader,
+//     uniforms: {
+//         uTime: {value: 0}
+//     },
+//     side: THREE.DoubleSide,
+// })
+
+// const material = new THREE.RawShaderMaterial({
+//     vertexShader: improvVertexShader,
+//     fragmentShader: improvFragmentShader,
+//     uniforms: {
+//         uTime: {value: 0}
+//     },
+//     side: THREE.DoubleSide
+// })
 
 
 
@@ -108,7 +123,7 @@ const unrealBloomPass = new UnrealBloomPass();
 unrealBloomPass.strength = 0.3;
 unrealBloomPass.threshold = 1.5;
 unrealBloomPass.radius = 0.2;
-effectComposer.addPass(unrealBloomPass);
+// effectComposer.addPass(unrealBloomPass);
 
 // const renderPass = new renderPass
 

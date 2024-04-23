@@ -3,6 +3,7 @@
 precision mediump float;
 
 varying vec2 vUv;
+varying float vTime;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
@@ -262,12 +263,15 @@ void main() {
 
     //Colors!!!
 
-    float factor = step(0.8, sin(cnoise(vUv * 10.0) * 15.0));
+    // float factor = step(0.8, sin(cnoise(vUv * 10.0) * 15.0));
+    float factor = step(0.8, sin(cnoise(vUv * 10.0) * 30.0 + vTime));
     vec3 backgroundColor = vec3(0.0);
     vec3 uvColor = vec3(vUv, 1.0);
 
     vec3 mixColor = mix(backgroundColor, uvColor, factor);
 
     gl_FragColor = vec4(mixColor, 1.0);
+
+    float pattern = floor(vUv.x * 10.0) / 10.0 * floor(vUv.y * 10.0) / 10.0;
 
 }
